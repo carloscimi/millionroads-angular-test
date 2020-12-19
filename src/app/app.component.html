@@ -1,0 +1,18 @@
+<ngx-loading-bar [includeSpinner]="false"></ngx-loading-bar>
+
+<app-navbar></app-navbar>
+
+<div id="content-page">
+  <router-outlet></router-outlet>
+</div>
+
+<p-toast position="top-center" class="toast"></p-toast>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" #confirm id="confirmation">
+  <p-footer>
+    <button type="button" pButton icon="fa fa-check" label="Yes"
+      (click)="confirm.accept()"></button>
+    <button type="button" pButton icon="fa fa-times" label="No"
+      (click)="confirm.reject()"></button>
+  </p-footer>
+</p-confirmDialog>

@@ -1,0 +1,44 @@
+<form #form="ngForm" autocomplete="off" (ngSubmit)="confirmSave()">
+  <div *ngIf="employee.id">
+    <img src="{{employee.profile_image}}" alt="Profile Picture" style="width: 50px;">
+  </div>
+  <div class="p-field p-grid">
+      <label for="id" class="p-col-fixed" style="width:100px">Id</label>
+      <div class="p-col">
+          <input id="id" [(ngModel)]="employee.id" name="id" type="text" readonly="true" pInputText>
+      </div>
+  </div>
+  <div class="p-field p-grid">
+      <label for="name" class="p-col-fixed" style="width:100px">Name</label>
+      <div class="p-col">
+        <input id="name" [(ngModel)]="employee.employee_name" name="name" required type="text" pInputText maxlength="100">
+      </div>
+  </div>
+  <div class="p-field p-grid">
+      <label for="salary" class="p-col-fixed" style="width:100px">Salary</label>
+      <div class="p-col">
+        <input id="salary" [(ngModel)]="employee.employee_salary" name="salary" type="text" pInputText placeholder="0,00" required
+          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }">
+      </div>
+  </div>
+  <div class="p-field p-grid">
+    <label for="age" class="p-col-fixed" style="width:100px">Age</label>
+    <div class="p-col">
+      <input id="age" [(ngModel)]="employee.employee_age" name="age" required type="text" (keypress)="numberOnly($event)" pInputText maxlength="3">
+    </div>
+  </div>
+  <div class="p-field p-grid">
+    <label for="image" class="p-col-fixed" style="width:100px">Profile Image</label>
+    <div class="p-col">
+        <input id="image" [(ngModel)]="employee.profile_image" name="image" type="text" pInputText required maxlength="100">
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="p-col cadastro-acoes">
+    <button pButton type="submit" label="Save" [disabled]="form.invalid"></button>
+    <button pButton type="button" label="New" class="ui-button-info" (click)="novo(form)"></button>
+    <a routerLink="/employees">Back to employees</a>
+  </div>
+</form>

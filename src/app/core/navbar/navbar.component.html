@@ -1,0 +1,21 @@
+<nav id="navbar">
+  <div class="p-grid">
+    <div class="p-col-10 p-md-6 p-text-left">
+      <h1 class="nav-title">Millionroads - Angular Test</h1>
+    </div>
+    <div class="p-col-2 p-md-6 p-text-right" style="padding-right: 20px;">
+      <p>
+        <p-button type="text" (click)="display = true" icon="pi pi-th-large"></p-button>
+      </p>
+    </div>
+  </div>
+
+  <p-sidebar [(visible)]="display" position="right" [showCloseIcon]="false">
+    <h1 style="font-weight:normal">Menu</h1>
+    <hr>
+    <ul class="navbar-menu">
+      <li class="navbar-menuitem"><a routerLink="/employees" (click)="display = false">Search Employees</a></li>
+      <li class="navbar-menuitem"><a routerLink="/employees/new" (click)="display = false">Create Employee</a></li>
+    </ul>
+  </p-sidebar>
+</nav>

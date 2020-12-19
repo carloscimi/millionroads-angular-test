@@ -1,0 +1,85 @@
+<div class="p-grid">
+  <div class="p-col">
+    <p-table #table [value]="employees" dataKey="id" styleClass="p-table-customers" [rowHover]="true" [loading]="loading" [responsive]="true"
+        [rows]="numPagInic" [showCurrentPageReport]="true" [rowsPerPageOptions]="numPag"
+        [paginator]="true" currentPageReportTemplate="Showing &#123;first&#125; - &#123;last&#125; of &#123;totalRecords&#125; employees"
+        [filterDelay]="0" [globalFilterFields]="['id', 'employee_name', 'employee_salary', 'employee_age']">
+        <ng-template pTemplate="caption">
+          <div class="p-grid">
+            <div class="p-col-12 p-md-6" style="font-size: 20px;">List of Employees</div>
+            <div class="p-col-12 p-md-6" style="text-align: center;">
+              <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="table.filterGlobal($event.target.value, 'contains')" placeholder="Global Search"/>
+              </span>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 5.0rem"></th>
+              <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+              <th pSortableColumn="employee_name">Name <p-sortIcon field="employee_name"></p-sortIcon></th>
+              <th pSortableColumn="employee_salary">Salary <p-sortIcon field="employee_salary"></p-sortIcon></th>
+              <th pSortableColumn="employee_age">Age <p-sortIcon field="employee_age"></p-sortIcon></th>
+              <th style="width: 3.5rem"></th>
+              <th style="width: 3.5rem"></th>
+            </tr>
+            <tr>
+              <th></th>
+              <th>
+                <input pInputText type="text" (input)="table.filter($event.target.value, 'id', 'contains')" placeholder="Search for ID" class="p-column-filter">
+              </th>
+              <th>
+                <input pInputText type="text" (input)="table.filter($event.target.value, 'employee_name', 'contains')" placeholder="Search for Name" class="p-column-filter">
+              </th>
+              <th>
+                <input pInputText type="text" (input)="table.filter($event.target.value, 'employee_salary', 'contains')" placeholder="Search for Salary" class="p-column-filter">
+              </th>
+              <th>
+                <input pInputText type="text" (input)="table.filter($event.target.value, 'employee_age', 'contains')" placeholder="Search for Age" class="p-column-filter">
+              </th>
+              <th></th>
+              <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employee>
+            <tr class="p-selectable-row">
+                <td>
+                  <span class="p-column-title">Profile Picture</span>
+                  <img src="{{employee.profile_image}}" alt="Profile Picture" style="width: 50px;">
+                </td>
+                <td>
+                  <span class="p-column-title">Id</span>
+                  {{employee.id}}
+                </td>
+                <td>
+                  <span class="p-column-title">Name</span>
+                  {{employee.employee_name}}
+                </td>
+                <td>
+                  <span class="p-column-title">Salary</span>
+                  {{employee.employee_salary | currency:'EUR'}}
+                </td>
+                <td>
+                  <span class="p-column-title">Age</span>
+                  {{employee.employee_age}}
+                </td>
+                <td>
+                  <button [routerLink]="['/employees', employee.id]" pButton pRipple type="button" class="p-button-info" icon="pi pi-user-edit"
+                      pTooltip="View/Edit" tooltipPosition="top"></button>
+                </td>
+                <td>
+                  <button pButton pRipple type="button" class="p-button-danger" icon="pi pi-times"
+                      pTooltip="Excluir" tooltipPosition="top" (click)="confirmDelete(employee)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="7" style="text-align:left">Any employee founded.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+  </div>
+</div>
